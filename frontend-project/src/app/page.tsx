@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import { Container } from "@/components/container";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import fundoImg from "@/public/fundo one.jpg";
 import CarrosCard from "../components/productCard/carrosCard";
-import { CarProps } from "../utils/types/cars"
+import { CarProps } from "../utils/types/cars";
+import { SidebarProvider, SidebarTrigger } from "../components/ui/sidebar";
+import { Sidebar } from "../components/sideBar/sideBar";
 
 export default function Home() {
   const [catalogData, setCatalogData] = useState<CarProps[]>([]);
@@ -12,27 +14,30 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:3001/catalog')
-      .then(response => {
+    fetch("http://127.0.0.1:3001/catalog")
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Erro ao carregar os dados do catálogo');
+          throw new Error("Erro ao carregar os dados do catálogo");
         }
         return response.json();
       })
-      .then(data => {
-        console.log('Dados recebidos:', data);
+      .then((data) => {
+        console.log("Dados recebidos:", data);
         setCatalogData(data);
         setIsLoading(false);
       })
-      .catch(error => {
-        console.error('Erro ao buscar os dados do catálogo', error);
-        setError('Erro ao carregar os dados do catálogo. Tente novamente mais tarde.');
+      .catch((error) => {
+        console.error("Erro ao buscar os dados do catálogo", error);
+        setError(
+          "Erro ao carregar os dados do catálogo. Tente novamente mais tarde.",
+        );
         setIsLoading(false);
       });
   }, []);
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="relative flex flex-col items-center w-full h-screen">
+      return (
       <div className="w-full">
         <Image
           src={fundoImg}
@@ -43,7 +48,6 @@ export default function Home() {
           sizes="100vw"
         />
       </div>
-
       <Container>
         <section className="w-full mx-auto p-4">
           {isLoading ? (

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { FaUserCircle, FaRegHeart } from "react-icons/fa";
 import { Input } from "@/components/input/index";
-import { Sidebar } from "@/components/sideBar/sideBar";
 import { ThemeButton } from "../themeChange/themeButton";
 import { usePathname } from "next/navigation";
 
@@ -35,7 +34,7 @@ export function Header({ user }: Props) {
 
   return (
     <>
-      <header className="w-full h-16 bg-primario text-white dark:bg-zinc-900 dark:text-white px-4 md:px-6 transition-colors">
+      <header className="relative flex w-full h-16 bg-primario text-white dark:bg-zinc-900 dark:text-white px-4 md:px-6 transition-colors">
         <div className="max-w-screen-xl mx-auto">
           <nav className="flex items-center justify-between w-full gap-4">
             {/* Logo */}
@@ -102,7 +101,6 @@ export function Header({ user }: Props) {
           </nav>
         </div>
       </header>
-      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} user={user} />
     </>
   );
 }
